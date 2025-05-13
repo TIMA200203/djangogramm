@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% block content %}
+<h2>Логін</h2>
+
+<form method="post">
+    {% csrf_token %}
+    
+    {{ form.as_p }} 
+
+    {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+    {% endif %}
+
+    <button type="submit">Увійти</button>
+</form>
+
+{% if form.errors %}
+    <ul>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<p>Немає профіля? <a href="{% url 'register' %}">Зареєструйтесь</a></p>
+<a href="{% provider_login_url 'google' %}">Увійти через Google</a>
+<a href="{% provider_login_url 'github' %}">Увійти через GitHub</a>
+<a href="{% provider_login_url 'discord' %}">Увійти через discord</a>
+{% endblock %}

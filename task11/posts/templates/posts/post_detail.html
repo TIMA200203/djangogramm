@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.text_for_post }}</p>
+  <p>Автор: {{ post.user.username }}</p>
+  <p>Дата: {{ post.created_at }}</p>
+
+  <form method="post" action="{% url 'like_post' post.id %}">
+    {% csrf_token %}
+    <button type="submit">
+      {% if request.user in post.likes.all %}
+        лайк
+      {% else %}
+        Лайк
+      {% endif %}
+    </button>
+  </form>
+{% endblock %}

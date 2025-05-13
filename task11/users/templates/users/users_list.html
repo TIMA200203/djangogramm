@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Список користувачів</h2>
+
+{% for user in users %}
+    <div class="card mb-3" id="user-{{ user.id }}">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="{% url 'user_profile' user.id %}">{{ user.username }}</a>
+            </h5>
+
+            {% if request.user != user %}
+                <a href="{% url 'follow_user' user.id %}" 
+                   class="btn follow-btn {% if user.id in following_ids %}btn-danger{% else %}btn-success{% endif %}">
+                    {% if user.id in following_ids %}Відписатися{% else %}Підписатися{% endif %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

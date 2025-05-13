@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block content %}
+
+<style>
+    .login-btn {
+        background-color: blue;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+        background-color: blue;
+    }
+</style>
+
+<div class="login-container">
+    <h2>Вхід</h2>
+
+    {% if form.errors %}
+        <ul class="error-messages">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p>Немає профілю? <a href="{% url 'register' %}">Зареєструйтесь</a></p>
+
+    <div class="social-login">
+        <p>Або увійдіть через:</p>
+        <a href="{% provider_login_url 'google' %}" class="btn google-btn">Google</a>
+        <a href="{% provider_login_url 'github' %}" class="btn github-btn">GitHub</a>
+        <a href="{% provider_login_url 'discord' %}" class="btn github-btn">discord</a>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+        {% endif %}
+
+        <button type="submit" class="btn login-btn blue-btn">Увійти</button>
+    </form>
+</div>
+{% endblock %}

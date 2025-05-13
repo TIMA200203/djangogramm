@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Користувачі, на яких ви підписані</h2>
+
+{% for user in following %}
+    <div class="card mb-3" id="user-{{ user.id }}">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="{% url 'user_profile' user.id %}">{{ user.username }}</a>
+            </h5>
+        </div>
+    </div>
+{% empty %}
+    <p>Ви не підписані на жодного користувача.</p>
+{% endfor %}
+{% endblock %}

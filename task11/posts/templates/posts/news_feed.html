@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Стрічка підписок</h2>
+
+{% for post in posts %}
+    <div class="post">
+        <p><strong>{{ post.user.username }}</strong> опублікував пост:</p>
+        <p>{{ post.text_for_post }}</p>
+        {% if post.images.all %}
+            {% for image in post.images.all %}
+                <img src="{{ image.image.url }}" alt="Зображення" width="200">
+            {% endfor %}
+        {% endif %}
+        <p>Лайки: {{ post.total_likes }}</p>
+    </div>
+    <hr>
+{% empty %}
+    <p>У вашій стрічці ще немає постів.</p>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h2>Profile</h2>
+{% if user.profile.avatar %}
+    <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="img-thumbnail" style="max-width: 150px;">
+{% else %}
+    <p>No avatar set</p>
+{% endif %}
+<p>Welcome, {{ user.username }}!</p>
+<a href="{% url 'profile_update' %}" class="btn btn-primary btn-lg">Оновити профіль</a>
+
+<h3>Ваші пости</h3>
+<a href="{% url 'add_post' %}" class="btn btn-success">Додати новий пост</a>
+<ul>
+    {% for post in user.posts.all %}
+        <li>
+            <p>{{ post.text_for_post }} ({{ post.created_at }})</p>
+            {% for image in post.images.all %}
+                <img src="{{ image.image.url }}" alt="Image for {{ post.text_for_post }}" class="img-thumbnail img-equal-size" />
+            {% endfor %}
+        </li>
+    {% empty %}
+        <p>У вас ще немає постів.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

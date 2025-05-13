@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Профіль користувача {{ user.username }}</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Про користувача</h5>
+        <p class="card-text">{{ user.profile_info }}</p> 
+
+        {% if request.user != user %}
+            {% if is_following %}
+                <a href="{% url 'follow_user' user.id %}" class="btn btn-danger">Відписатися</a>
+            {% else %}
+                <a href="{% url 'follow_user' user.id %}" class="btn btn-success">Підписатися</a>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+<h3>Пости користувача:</h3>
+{% if posts %}
+    <div class="list-group">
+        {% for post in posts %}
+            <div class="list-group-item">
+                <h5 class="list-group-item-heading">{{ post.title }}</h5>
+                <p class="list-group-item-text">{{ post.content }}</p>
+                <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Переглянути пост</a>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>У цього користувача ще немає постів.</p>
+{% endif %}
+
+{% endblock %}
