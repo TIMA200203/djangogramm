@@ -192,27 +192,27 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 SOCIALACCOUNT_EMAIL_VERIFICATION = "optional"
-
+#enter your keys & id
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': '1055371105888-4842tbt70eaf5mgcopajscemn0qj72a2.apps.googleusercontent.com',
-            'secret': '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',
+            'client_id': '',
+            'secret': '',
         }
     }
 }
 
 SOCIALACCOUNT_PROVIDERS['github'] = {
     'APP': {
-        'client_id': 'Ov23lilDObEBg9jubeBd',
-        'secret': 'e62b2839d57ea607dc4fe8357ee0285cc28064ef',
+        'client_id': '',
+        'secret': '',
     }
 }
 
 SOCIALACCOUNT_PROVIDERS['discord'] = {
         'APP': {
-            'client_id': '1343293799119720549',
-            'secret': 'FvUE6rXUL_lCngO1_QgqV_X9x8nmNEni',
+            'client_id': '',
+            'secret': '',
             'key': ''
         }
     }
